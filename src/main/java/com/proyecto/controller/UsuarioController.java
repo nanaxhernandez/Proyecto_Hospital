@@ -68,6 +68,15 @@ public class UsuarioController {
         return "usuario/detalle";
     }
 
+
+    @PostMapping("/buscarNombre")
+    public String buscarPorNombre(@RequestParam("nombre") String nombre, Model model) {
+        List<Usuario> usuarios = usuarioService.buscarPorNombre(nombre);
+        model.addAttribute("usuarios", usuarios);
+        return "usuario/listado";
+    }
+
+
     @PostMapping("/buscarCedula")
     public String buscarPorCedula(@RequestParam("cedula") String cedula, Model model) {
         Usuario usuario = usuarioService.buscarPorCedula(cedula);
