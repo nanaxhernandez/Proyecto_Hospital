@@ -44,7 +44,11 @@ public class UsuarioService {
     public Usuario buscarPorCorreo(String correo) {
         return usuarioRepository.findByCorreo(correo);
     }
-    
+
+    public List<Usuario> buscarPorNombre(String nombre) {
+    return usuarioRepository.findByNombreContainingIgnoreCase(nombre);
+    }
+
     public Usuario buscarPorCedula(String cedula) {
     return usuarioRepository.findByCedula(cedula);
 }
