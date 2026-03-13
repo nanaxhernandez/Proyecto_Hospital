@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head">
+        <title>Citas</title>
+    </head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4">
+            <h2>Listado de Citas</h2>
+            <a th:href="@{/cita/nuevo}" class="btn btn-primary mb-3">Nueva Cita</a>
+
+            <div th:if="${citas.empty}" class="alert alert-info">
+                No hay citas registradas. Crea una nueva.
+            </div>
+
+            <table class="table table-striped" th:unless="${citas.empty}">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cita : ${citas}">
+                        <td th:text="${cita.idCita}"></td>
+                        <td th:text="${cita.paciente.nombre + ' ' + cita.paciente.apellido}"></td>
+                        <td th:text="${cita.doctor.nombre}"></td>
+                        <td th:text="${cita.fecha}"></td>
+                        <td th:text="${cita.hora}"></td>
+                        <td th:text="${cita.motivo}"></td>
+                        <td>
+                            <span th:if="${cita.atendida}" class="badge bg-success">Atendida</span>
+                            <span th:unless="${cita.atendida}" class="badge bg-warning">Pendiente</span>
+                        </td>
+                        <td>
+                            <a th:href="@{/cita/modificar/{id}(id=${cita.idCita})}" class="btn btn-warning btn-sm">Modificar</a>
+                            <a th:href="@{/cita/eliminar/{id}(id=${cita.idCita})}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a th:if="${!cita.atendida}" th:href="@{/cita/atender/{id}(id=${cita.idCita})}" class="btn btn-success btn-sm">Atender</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>

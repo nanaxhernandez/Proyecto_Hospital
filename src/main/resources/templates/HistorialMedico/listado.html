@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head">
+    <title>Historial Médico</title>
+</head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2>Historial Médico</h2>
+        
+        <div th:if="${paciente}" class="alert alert-info">
+            Historial de: <strong th:text="${paciente.nombre + ' ' + paciente.apellido}"></strong>
+        </div>
+        
+        <div th:if="${historiales.empty}" class="alert alert-info">
+            No hay registros en el historial médico.
+        </div>
+        
+        <table class="table table-striped" th:unless="${historiales.empty}">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Paciente</th>
+                    <th>Doctor</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Tratamiento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="historial : ${historiales}">
+                    <td th:text="${historial.idHistorial}"></td>
+                    <td th:text="${historial.paciente.nombre + ' ' + historial.paciente.apellido}"></td>
+                    <td th:text="${historial.doctor != null ? historial.doctor.nombre : 'No asignado'}"></td>
+                    <td th:text="${historial.fecha}"></td>
+                    <td th:text="${historial.descripcion}"></td>
+                    <td th:text="${historial.tratamiento}"></td>
+                    <td>
+                        <a th:href="@{/historialmedico/modificar/{id}(id=${historial.idHistorial})}" class="btn btn-warning btn-sm">Modificar</a>
+                        <a th:href="@{/historialmedico/eliminar/{id}(id=${historial.idHistorial})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <a th:href="@{/}" class="btn btn-secondary mt-3">Volver al Inicio</a>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>
