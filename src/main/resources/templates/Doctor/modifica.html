@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head"></head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2 th:text="${doctor.idDoctor == null} ? 'Nuevo Doctor' : 'Modificar Doctor'"></h2>
+        
+        <form th:action="@{/doctor/guardar}" th:object="${doctor}" method="post">
+            <input type="hidden" th:field="*{idDoctor}" />
+            
+            <div class="mb-3">
+                <label>Nombre</label>
+                <input type="text" th:field="*{nombre}" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label>Especialidad</label>
+                <input type="text" th:field="*{especialidad}" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label>Teléfono</label>
+                <input type="text" th:field="*{telefono}" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label>Correo</label>
+                <input type="email" th:field="*{correo}" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label>Activo</label>
+                <input type="checkbox" th:field="*{activo}" />
+            </div>
+            
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/doctor/listado}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

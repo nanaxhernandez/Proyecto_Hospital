@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head">
+    <title>Pacientes</title>
+</head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2>Listado de Pacientes</h2>
+        <a th:href="@{/paciente/nuevo}" class="btn btn-primary mb-3">Nuevo Paciente</a>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="paciente : ${pacientes}">
+                    <td th:text="${paciente.idPaciente}"></td>
+                    <td th:text="${paciente.nombre}"></td>
+                    <td th:text="${paciente.apellido}"></td>
+                    <td th:text="${paciente.telefono}"></td>
+                    <td th:text="${paciente.correo}"></td>
+                    <td>
+                        <a th:href="@{/paciente/modificar/{id}(id=${paciente.idPaciente})}" class="btn btn-warning">Modificar</a>
+                        <a th:href="@{/paciente/eliminar/{id}(id=${paciente.idPaciente})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

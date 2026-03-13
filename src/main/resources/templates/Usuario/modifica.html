@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head">
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4">
+            <h2>Formulario Usuario</h2>
+            <form th:action="@{/usuario/guardar}" th:object="${usuario}" method="post">
+                <div class="mb-3">
+                    <label>Nombre</label>
+                    <input type="text" th:field="*{nombre}" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label>Correo</label>
+                    <input type="email" th:field="*{correo}" class="form-control"/>
+                <div class="mb-3">
+                    <label for="cedula" class="form-label">Cédula</label>
+                    <input type="text" id="cedula" th:field="*{cedula}" class="form-control" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label>Rol</label>
+                    <input type="text" th:field="*{rol}" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label>Activo</label>
+                    <input type="checkbox" th:field="*{activo}" />
+                </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a th:href="@{/usuario/listado}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
+

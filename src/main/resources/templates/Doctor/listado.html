@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head">
+    <title>Doctores</title>
+</head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2>Listado de Doctores</h2>
+        <a th:href="@{/doctor/nuevo}" class="btn btn-primary mb-3">Nuevo Doctor</a>
+        
+        <div th:if="${doctores.empty}" class="alert alert-info">
+            No hay doctores registrados. Crea uno nuevo.
+        </div>
+        
+        <table class="table table-striped" th:unless="${doctores.empty}">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Especialidad</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="doctor : ${doctores}">
+                    <td th:text="${doctor.idDoctor}"></td>
+                    <td th:text="${doctor.nombre}"></td>
+                    <td th:text="${doctor.especialidad}"></td>
+                    <td th:text="${doctor.telefono}"></td>
+                    <td th:text="${doctor.correo}"></td>
+                    <td>
+                        <a th:href="@{/doctor/modificar/{id}(id=${doctor.idDoctor})}" class="btn btn-warning btn-sm">Modificar</a>
+                        <a th:href="@{/doctor/eliminar/{id}(id=${doctor.idDoctor})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

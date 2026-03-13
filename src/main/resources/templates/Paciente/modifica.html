@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head"></head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2 th:text="${paciente.idPaciente == null} ? 'Nuevo Paciente' : 'Modificar Paciente'"></h2>
+        
+        <form th:action="@{/paciente/guardar}" th:object="${paciente}" method="post">
+            <input type="hidden" th:field="*{idPaciente}" />
+            
+            <div class="mb-3">
+                <label>Nombre</label>
+                <input type="text" th:field="*{nombre}" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label>Apellido</label>
+                <input type="text" th:field="*{apellido}" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label>Fecha de Nacimiento</label>
+                <input type="date" th:field="*{fechaNacimiento}" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label>Dirección</label>
+                <input type="text" th:field="*{direccion}" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label>Teléfono</label>
+                <input type="text" th:field="*{telefono}" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label>Correo</label>
+                <input type="email" th:field="*{correo}" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label>Activo</label>
+                <input type="checkbox" th:field="*{activo}" />
+            </div>
+            
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/paciente/listado}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

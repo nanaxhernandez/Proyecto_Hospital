@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Buscar Usuario</title></head>
+<body>
+    <h1>Buscar Usuario</h1>
+
+    <h2>Por Correo</h2>
+    <form th:action="@{/usuario/buscarCorreo}" method="post">
+        <input type="email" name="correo" placeholder="Correo" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    </form>
+    <h2>Por Cédula</h2>
+<form th:action="@{/usuario/buscarCedula}" method="post">
+    <input type="text" name="cedula" placeholder="Cédula" required>
+    <button type="submit">Buscar</button>
+</form>
+
+</body>
+</html>
