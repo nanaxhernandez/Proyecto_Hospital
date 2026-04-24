@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head">
+    <title>Facturación</title>
+</head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2>Listado de Facturación</h2>
+        <a th:href="@{/facturacion/nuevo}" class="btn btn-primary mb-3">Nueva Factura</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Número Factura</th>
+                    <th>Cliente</th>
+                    <th>Monto</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="facturacion : ${facturaciones}">
+                    <td th:text="${facturacion.idFactura}"></td>
+                    <td th:text="${facturacion.numeroFactura}"></td>
+                    <td th:text="${facturacion.cliente}"></td>
+                    <td th:text="${facturacion.monto}"></td>
+                    <td th:text="${facturacion.fechaFactura}"></td>
+                    <td th:text="${facturacion.estado}"></td>
+                    <td>
+                        <a th:href="@{/facturacion/modificar/{id}(id=${facturacion.idFactura})}" class="btn btn-warning">Modificar</a>
+                        <a th:href="@{/facturacion/eliminar/{id}(id=${facturacion.idFactura})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

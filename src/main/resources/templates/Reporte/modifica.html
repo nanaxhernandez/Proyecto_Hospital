@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head"></head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2 th:text="${reporte.idReporte == null} ? 'Nuevo Reporte' : 'Modificar Reporte'"></h2>
+
+        <form th:action="@{/reporte/guardar}" th:object="${reporte}" method="post">
+            <input type="hidden" th:field="*{idReporte}" />
+
+            <div class="mb-3">
+                <label>Nombre del Reporte</label>
+                <input type="text" th:field="*{nombreReporte}" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Descripción</label>
+                <input type="text" th:field="*{descripcion}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Fecha del Reporte</label>
+                <input type="date" th:field="*{fechaReporte}" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Estado</label>
+                <input type="text" th:field="*{estado}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Activo</label>
+                <input type="checkbox" th:field="*{activo}" />
+            </div>
+
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/reporte/listado}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

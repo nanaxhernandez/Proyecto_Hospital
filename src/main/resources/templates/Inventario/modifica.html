@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head"></head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2 th:text="${inventario.idInventario == null} ? 'Nuevo Producto' : 'Modificar Producto'"></h2>
+
+        <form th:action="@{/inventario/guardar}" th:object="${inventario}" method="post">
+            <input type="hidden" th:field="*{idInventario}" />
+
+            <div class="mb-3">
+                <label>Nombre del Producto</label>
+                <input type="text" th:field="*{nombreProducto}" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Descripción</label>
+                <input type="text" th:field="*{descripcion}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Cantidad</label>
+                <input type="number" th:field="*{cantidad}" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Precio</label>
+                <input type="number" step="0.01" th:field="*{precio}" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/inventario/listado}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

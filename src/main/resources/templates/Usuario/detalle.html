@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Detalle Usuario</title></head>
+<body>
+    <h1>Datos del Usuario</h1>
+    <div th:if="${usuario != null}">
+        <p><strong>Nombre:</strong> <span th:text="${usuario.nombre}"></span></p>
+        <p><strong>Correo:</strong> <span th:text="${usuario.correo}"></span></p>
+    </div>
+    <div th:if="${usuario == null}">
+        <p>No se encontró ningún usuario.</p>
+    </div>
+</body>
+</html>

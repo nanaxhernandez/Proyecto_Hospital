@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head"></head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2 th:text="${cita.idCita == null} ? 'Nueva Cita' : 'Modificar Cita'"></h2>
+        
+        <form th:action="@{/cita/guardar}" th:object="${cita}" method="post">
+            <input type="hidden" th:field="*{idCita}" />
+            
+            <div class="mb-3">
+                <label>Paciente</label>
+                <select th:field="*{paciente.idPaciente}" class="form-control" required>
+                    <option value="">Seleccione un paciente</option>
+                    <option th:each="paciente : ${pacientes}" 
+                            th:value="${paciente.idPaciente}"
+                            th:text="${paciente.nombre + ' ' + paciente.apellido}"></option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label>Doctor</label>
+                <select th:field="*{doctor.idDoctor}" class="form-control" required>
+                    <option value="">Seleccione un doctor</option>
+                    <option th:each="doctor : ${doctores}" 
+                            th:value="${doctor.idDoctor}"
+                            th:text="${doctor.nombre} + ' (' + ${doctor.especialidad} + ')'"></option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label>Fecha</label>
+                <input type="date" th:field="*{fecha}" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label>Hora</label>
+                <input type="time" th:field="*{hora}" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label>Motivo</label>
+                <textarea th:field="*{motivo}" class="form-control" rows="3"></textarea>
+            </div>
+            
+            <input type="hidden" th:field="*{activo}" value="true" />
+            <input type="hidden" th:field="*{atendida}" value="false" />
+            
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/cita/listado}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

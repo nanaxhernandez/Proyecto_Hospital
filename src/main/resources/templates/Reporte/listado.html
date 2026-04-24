@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragmentos :: head">
+    <title>Reportes</title>
+</head>
+<body>
+    <header th:replace="general/fragmentos :: header"></header>
+
+    <div class="container mt-4">
+        <h2>Listado de Reportes</h2>
+        <a th:href="@{/reporte/nuevo}" class="btn btn-primary mb-3">Nuevo Reporte</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reporte : ${reportes}">
+                    <td th:text="${reporte.idReporte}"></td>
+                    <td th:text="${reporte.nombreReporte}"></td>
+                    <td th:text="${reporte.descripcion}"></td>
+                    <td th:text="${reporte.fechaReporte}"></td>
+                    <td th:text="${reporte.estado}"></td>
+                    <td>
+                        <a th:href="@{/reporte/modificar/{id}(id=${reporte.idReporte})}" class="btn btn-warning">Modificar</a>
+                        <a th:href="@{/reporte/eliminar/{id}(id=${reporte.idReporte})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="general/fragmentos :: footer"></footer>
+</body>
+</html>

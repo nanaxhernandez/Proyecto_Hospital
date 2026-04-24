@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4">
+            <h2>👤 Listado de Usuarios</h2>
+            <a th:href="@{/usuario/nuevo}" class="btn btn-primary mb-3">
+                <span>➕</span> Nuevo Usuario
+            </a>
+
+            <div class="table-container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Cédula</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usuario : ${usuarios}">
+                            <td th:text="${usuario.nombre}"></td>
+                            <td th:text="${usuario.correo}"></td>
+                            <td th:text="${usuario.cedula}"></td>
+                            <td>
+                                <span class="badge" th:classappend="${usuario.rol == 'ADMIN'} ? 'bg-danger' : 'bg-info'" th:text="${usuario.rol}"></span>
+                            </td>
+                            <td>
+                                <a th:href="@{/usuario/modificar/{id}(id=${usuario.idUsuario})}" class="btn btn-warning btn-sm">✏️ Modificar</a>
+                                <a th:href="@{/usuario/eliminar/{id}(id=${usuario.idUsuario})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este usuario?')">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
